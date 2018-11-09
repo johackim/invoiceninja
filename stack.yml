@@ -1,0 +1,32 @@
+version: "3"
+
+services:
+  mysql:
+    image: mariadb:10.3.10
+    volumes:
+      - mysql:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: myp@ssw0rd
+      MYSQL_DATABASE: ninja
+      MYSQL_USER: ninja
+      MYSQL_PASSWORD: myp@ssw0rd
+
+  app:
+    image: ston3o/invoiceninja:4.5.6
+    ports:
+      - 0:80
+    environment:
+      - APP_LOCALE=fr
+      - APP_ENV=production
+      - APP_DEBUG=0
+      - APP_URL=${SCHEME:-http}://${DOMAIN:?err}
+      - APP_KEY=${APP_KEY:-SomeRandomStringSomeRandomString}
+      - APP_CIPHER=AES-256-CBC
+      - DB_USERNAME=root
+      - DB_PASSWORD=myp@ssw0rd
+      - DB_HOST=mysql
+      - DB_DATABASE=ninja
+      - PRECONFIGURED_INSTALL=true
+
+volumes:
+  mysql:
