@@ -13,6 +13,8 @@ services:
 
   app:
     image: ston3o/invoiceninja:4.5.6
+    volumes:
+      - uploads:/var/www/app/public/logo
     ports:
       - 0:80
     environment:
@@ -30,3 +32,4 @@ services:
 
 volumes:
   mysql:
+  uploads:
