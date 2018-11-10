@@ -4,7 +4,7 @@ Invoiceninja
 ## Quick start
 
 ```bash
-DOMAIN=<DOMAIN> docker stack deploy -c stack.yml invoiceninja
+DOMAIN=https://<DOMAIN> docker stack deploy -c stack.yml invoiceninja
 ```
 
 ## Support
