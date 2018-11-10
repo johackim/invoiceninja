@@ -56,6 +56,8 @@ COPY cron.sh /usr/local/sbin/cron.sh
 
 RUN chmod +x /usr/local/sbin/cron.sh
 
+VOLUME ["/var/www/app/public/logo"]
+
 EXPOSE 80
 
 CMD ["/usr/bin/supervisord", "-c", "/etc/supervisor/conf.d/nginx-php-fpm.conf"]

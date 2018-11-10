@@ -1,8 +1,8 @@
-version: "3"
+version: "3.2"
 
 services:
   mysql:
-      image: mysql:5.7
+    image: mysql:5.7
     volumes:
       - mysql:/var/lib/mysql
     environment:
@@ -14,7 +14,11 @@ services:
   app:
     image: ston3o/invoiceninja:4.5.6
     volumes:
-      - uploads:/var/www/app/public/logo
+      - type: volume
+        source: uploads
+        target: /var/www/app/public/logo
+        volume:
+          nocopy: true
     ports:
       - 0:80
     environment:
@@ -24,6 +28,7 @@ services:
       - APP_URL=${SCHEME:-http}://${DOMAIN:?err}
       - APP_KEY=${APP_KEY:-SomeRandomStringSomeRandomString}
       - APP_CIPHER=AES-256-CBC
+      - REQUIRE_HTTPS=true
       - DB_USERNAME=root
       - DB_PASSWORD=myp@ssw0rd
       - DB_HOST=mysql
